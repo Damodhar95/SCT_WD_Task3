@@ -1,25 +1,250 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic-Tac-Toe</title>
+    <meta name="theme-color" content="#070914">
+    <title>NEON ARENA | Cybernetic Strategy Duel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="task3.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Tic-Tac-Toe</h1>
-        <div>
-            <label for="mode">Select Game Mode:</label>
-            <select id="mode">
-                <option value="pvp">Player vs. Player</option>
-                <option value="pvc">Player vs. Computer</option>
-            </select>
-        </div>
-        <div class="game-board" id="gameBoard"></div>
-        <div class="status" id="status">Select a mode to start playing!</div>
-        <button id="restart">Restart Game</button>
-    </div>
+
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="grid-overlay"></div>
+
+    <main class="app">
+
+        <!-- HEADER -->
+        <header class="topbar">
+            <a href="#" class="brand">
+                <span class="brand-mark">N<span>A</span></span>
+                <span class="brand-name">NEON<span>ARENA</span></span>
+            </a>
+
+            <div class="system-status">
+                <span class="status-light"></span>
+                ARENA SYSTEM ONLINE
+            </div>
+
+            <button class="sound-button" id="soundToggle" type="button" aria-pressed="false">
+                <span id="soundIcon">♫</span>
+                <span id="soundText">SOUND OFF</span>
+            </button>
+        </header>
+
+        <!-- INTRO -->
+        <section class="intro">
+            <div class="intro-line">
+                <span class="line"></span>
+                <span>TACTICAL GAMING INTERFACE / 001</span>
+                <span class="line"></span>
+            </div>
+
+            <h1>ENTER THE <span>ARENA</span></h1>
+            <p>Two symbols. Nine cells. One ultimate strategist.</p>
+        </section>
+
+        <!-- MAIN GAME -->
+        <section class="arena-layout">
+
+            <!-- LEFT: PLAYER X -->
+            <aside class="player-card player-x-card">
+                <div class="player-card-top">
+                    <span class="player-tag">01 / BLUE TEAM</span>
+                    <span class="player-live"><i></i> READY</span>
+                </div>
+
+                <div class="avatar avatar-x">X</div>
+
+                <h2>PLAYER <span>X</span></h2>
+                <p class="player-role" id="playerXRole">HUMAN PLAYER</p>
+
+                <div class="player-divider"></div>
+
+                <div class="player-stat">
+                    <span>VICTORIES</span>
+                    <strong id="scoreX">0</strong>
+                </div>
+
+                <div class="player-stat">
+                    <span>WIN STREAK</span>
+                    <strong id="streakX">0</strong>
+                </div>
+
+                <div class="energy-bar">
+                    <span></span>
+                </div>
+                <p class="energy-label">ENERGY SIGNATURE: CYAN</p>
+            </aside>
+
+            <!-- CENTER: GAME -->
+            <section class="game-console">
+
+                <div class="console-header">
+                    <div>
+                        <span class="section-label">LIVE MATCH</span>
+                        <h2>THE GRID</h2>
+                    </div>
+                    <div class="round-badge">
+                        <span>ROUND</span>
+                        <strong id="roundNumber">01</strong>
+                    </div>
+                </div>
+
+                <div class="match-status" id="turnIndicator">
+                    <span class="turn-icon" id="turnSymbol">X</span>
+                    <div class="turn-copy">
+                        <span id="statusLabel">CURRENT PLAYER</span>
+                        <strong id="status">PLAYER X'S TURN</strong>
+                    </div>
+                    <span class="status-pulse"></span>
+                </div>
+
+                <div class="board-frame">
+                    <div class="board-corner corner-tl"></div>
+                    <div class="board-corner corner-tr"></div>
+                    <div class="board-corner corner-bl"></div>
+                    <div class="board-corner corner-br"></div>
+                    <div class="game-board" id="gameBoard" aria-label="Tic Tac Toe game board"></div>
+                </div>
+
+                <div class="game-controls">
+                    <button class="primary-button" id="restart" type="button">
+                        <span>↻</span> NEW ROUND
+                    </button>
+                    <button class="secondary-button" id="resetScores" type="button">
+                        RESET MATCH
+                    </button>
+                </div>
+
+                <div class="match-message" id="matchMessage" aria-live="polite">
+                    <span class="message-dot"></span>
+                    SYSTEM READY. MAKE YOUR MOVE.
+                </div>
+
+            </section>
+
+            <!-- RIGHT: PLAYER O -->
+            <aside class="player-card player-o-card">
+                <div class="player-card-top">
+                    <span class="player-tag">02 / PURPLE TEAM</span>
+                    <span class="player-live"><i></i> READY</span>
+                </div>
+
+                <div class="avatar avatar-o">O</div>
+
+                <h2>PLAYER <span>O</span></h2>
+                <p class="player-role" id="playerORole">PLAYER 2</p>
+
+                <div class="player-divider"></div>
+
+                <div class="player-stat">
+                    <span>VICTORIES</span>
+                    <strong id="scoreO">0</strong>
+                </div>
+
+                <div class="player-stat">
+                    <span>WIN STREAK</span>
+                    <strong id="streakO">0</strong>
+                </div>
+
+                <div class="energy-bar purple-energy">
+                    <span></span>
+                </div>
+                <p class="energy-label">ENERGY SIGNATURE: VIOLET</p>
+            </aside>
+
+        </section>
+
+        <!-- CONTROL CENTER -->
+        <section class="control-center">
+
+            <div class="control-card mode-control">
+                <div class="control-heading">
+                    <span class="control-icon">⌘</span>
+                    <div>
+                        <span class="section-label">CONFIGURATION</span>
+                        <h3>GAME SETTINGS</h3>
+                    </div>
+                </div>
+
+                <label for="mode">MATCH TYPE</label>
+                <select id="mode">
+                    <option value="pvp">PLAYER VS PLAYER</option>
+                    <option value="pvc">PLAYER VS AI</option>
+                </select>
+
+                <label for="difficulty">AI INTELLIGENCE</label>
+                <select id="difficulty">
+                    <option value="easy">EASY / RANDOM</option>
+                    <option value="medium" selected>MEDIUM / TACTICAL</option>
+                    <option value="hard">IMPOSSIBLE / MINIMAX</option>
+                </select>
+
+                <p class="setting-note" id="difficultyNote">
+                    Tactical AI looks for winning and blocking opportunities.
+                </p>
+            </div>
+
+            <div class="control-card history-control">
+                <div class="control-heading">
+                    <span class="control-icon">◷</span>
+                    <div>
+                        <span class="section-label">MATCH INTELLIGENCE</span>
+                        <h3>MOVE HISTORY</h3>
+                    </div>
+                </div>
+
+                <div class="history-list" id="moveHistory">
+                    <div class="history-empty">WAITING FOR FIRST MOVE...</div>
+                </div>
+            </div>
+
+            <div class="control-card stats-control">
+                <div class="control-heading">
+                    <span class="control-icon">◈</span>
+                    <div>
+                        <span class="section-label">ARENA ANALYTICS</span>
+                        <h3>MATCH RECORD</h3>
+                    </div>
+                </div>
+
+                <div class="record-item">
+                    <span>TOTAL ROUNDS</span>
+                    <strong id="totalRounds">0</strong>
+                </div>
+
+                <div class="record-item">
+                    <span>DRAWS</span>
+                    <strong id="scoreDraw">0</strong>
+                </div>
+
+                <div class="record-item">
+                    <span>LAST RESULT</span>
+                    <strong class="last-result" id="lastResult">--</strong>
+                </div>
+
+                <div class="record-item">
+                    <span>WIN RATE / X</span>
+                    <strong id="winRate">0%</strong>
+                </div>
+            </div>
+
+        </section>
+
+        <footer class="footer">
+            <span>NEON ARENA <b>© 2026</b></span>
+            <span>BUILT FOR STRATEGISTS. POWERED BY LOGIC.</span>
+            <span class="footer-version">SYSTEM V1.0</span>
+        </footer>
+
+    </main>
+
     <script src="task3.js"></script>
 </body>
 </html>
